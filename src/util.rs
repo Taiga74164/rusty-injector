@@ -2,12 +2,11 @@ extern crate winapi;
 
 // https://doc.rust-lang.org/std/os/windows/ffi/trait.OsStrExt.html
 // https://friendlyuser.github.io/posts/tech/rust/Interacting_with_Windows_File_System_using_WinAPI_in_Rust/
-use std::ffi::{CStr, OsString};
-use std::os::windows::ffi::{OsStrExt, OsStringExt};
+use std::ffi::OsString;
+use std::os::windows::ffi::OsStrExt;
 use std::ptr::null_mut;
 use winapi::um::commdlg::{GetOpenFileNameW, OPENFILENAMEW};
 use winapi::um::commdlg::{OFN_PATHMUSTEXIST, OFN_FILEMUSTEXIST};
-
 
 pub fn select_file(filestr: &str, title: &str) -> Option<String> {
     let mut curr_path: [u16; 260] = [0; 260];

@@ -3,17 +3,16 @@ extern crate winapi;
 mod load_library;
 mod util;
 
-use std::ptr::null_mut;
+use util::select_file;
+use load_library::load_library_dll;
 
+use std::ptr::null_mut;
 use std::ffi::CString;
 use winapi::um::processthreadsapi::CreateProcessA;
 use winapi::um::winnt::HANDLE;
 use winapi::um::handleapi::CloseHandle;
 use winapi::um::processthreadsapi::{PROCESS_INFORMATION, STARTUPINFOA, ResumeThread};
 use winapi::um::winbase::CREATE_SUSPENDED;
-
-use util::select_file;
-use load_library::load_library_dll;
 
 fn open_process(path: CString, handle_ptr: *mut HANDLE, thread_ptr: *mut HANDLE) -> bool {
     let mut si: STARTUPINFOA = unsafe { std::mem::zeroed() };
